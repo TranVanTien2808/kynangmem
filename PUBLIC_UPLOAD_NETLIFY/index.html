@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#103d50">
+  <title>Hành trình khám phá | Bảo tàng Đà Nẵng</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap head">
+      <div>
+        <div class="eyebrow">BẢO TÀNG ĐÀ NẴNG · TẦNG 2</div>
+        <h1>🧭 Hành trình khám phá</h1>
+        <p>Khám phá các phòng trưng bày, tích điểm và mở khóa thử thách.</p>
+      </div>
+      <div class="head-actions">
+        <span class="pill" id="modeBadge">● Chế độ chỉ quét QR</span>
+        <button class="outline light" id="helpBtn">Hướng dẫn</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow dark">HỒ SƠ NHÀ KHÁM PHÁ</div>
+        <h2 id="welcome">Chào mừng nhà khám phá!</h2>
+        <p id="message">Quét QR tại một phòng để mở khóa và bắt đầu hành trình.</p>
+      </div>
+      <div class="score">
+        <strong id="points">0</strong>
+        <span>ĐIỂM KHÁM PHÁ</span>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <span>Đã tham quan</span>
+        <strong id="visitedCount">0/12</strong>
+      </div>
+      <div class="stat">
+        <span>Tiến độ</span>
+        <strong id="percentage">0%</strong>
+      </div>
+      <div class="stat">
+        <span>Huy hiệu</span>
+        <strong id="badgeCount">0/4</strong>
+      </div>
+      <div class="stat">
+        <span>Kho báu</span>
+        <strong id="treasureCount">0/3</strong>
+      </div>
+    </section>
+
+    <div class="progress" aria-label="Tiến độ tham quan">
+      <div id="progressFill"></div>
+    </div>
+
+    <div class="layout">
+      <section class="panel map-panel">
+        <div class="section-heading">
+          <div>
+            <h2>🗺️ Bản đồ tầng 2</h2>
+            <p>Chấm xanh: vị trí quét QR gần nhất · Xanh lá: đã mở khóa · Xám: bị khóa</p>
+          </div>
+          <button class="outline" id="zoomReset">Thu về 100%</button>
+        </div>
+        
+        <div class="zoom-tools">
+          <button id="zoomOut" aria-label="Thu nhỏ">-</button>
+          <span id="zoomLabel">100%</span>
+          <button id="zoomIn" aria-label="Phóng to">+</button>
+        </div>
+        
+        <div class="map-viewport" id="viewport">
+          <div class="map-content" id="mapContent">
+            <img src="floor2.png" alt="Sơ đồ gốc tầng 2 Bảo tàng Đà Nẵng">
+            <div id="pins"></div>
+          </div>
+        </div>
+        
+        <div class="legend">
+          <span><i class="blue"></i>Đang ở</span>
+          <span><i class="green"></i>Đã tham quan</span>
+          <span><i class="gray"></i>Chưa tham quan</span>
+        </div>
+        
+        <div class="location-card" aria-live="polite">
+          <span>📍 Vị trí hiện tại</span>
+          <strong id="currentRoom">Chưa xác định</strong>
+          <small id="positionSource">Quét QR tại phòng để xác nhận vị trí.</small>
+        </div>
+        
+        <label for="roomSelect">Chế độ khóa QR (không cho chọn phòng thủ công)</label>
+        <div class="input-row">
+          <select id="roomSelect"></select>
+          <button id="visitBtn">Đến phòng</button>
+        </div>
+        <div class="input-row">
+          <button class="outline" id="nextBtn">Gợi ý phòng chưa đi</button>
+          <button class="outline" id="audioBtn">🔊 Nghe giới thiệu</button>
+        </div>
+        <p class="hint">Chỉ quét QR mới mở khóa phòng. Không thể mở khóa bằng cách nhấn vào bản đồ. QR thường không xác minh được khách có thực sự đứng tại phòng.</p>
+      </section>
+
+      <div class="side">
+        <section class="panel">
+          <div class="section-heading">
+            <h2>🏅 Bộ sưu tập huy hiệu</h2>
+          </div>
+          <div id="badges" class="badges"></div>
+        </section>
+        
+        <section class="panel">
+          <h2>🧩 Câu đố lịch sử</h2>
+          <p class="hint">Đến một phòng để mở câu hỏi. Nội dung demo dựa trên tên khu trưng bày, có thể thay bằng câu hỏi do bảo tàng duyệt.</p>
+          <div id="quizBox" class="quiz-box"></div>
+        </section>
+        
+        <section class="panel">
+          <h2>💎 Truy tìm kho báu</h2>
+          <p class="hint">Đến đúng khu vực được gợi ý để mở khóa kho báu.</p>
+          <div id="treasures"></div>
+        </section>
+      </div>
+    </div>
+
+    <section class="panel bottom">
+      <h2>📋 Các phòng và lịch sử</h2>
+      <div id="roomList" class="room-list"></div>
+      <div class="input-row">
+        <button class="outline" id="exportBtn">Xuất nhật ký .txt</button>
+        <button class="danger" id="resetBtn">Bắt đầu hành trình mới</button>
+      </div>
+    </section>
+
+    <section class="panel bottom" id="ai-guide">
+      <div class="section-heading">
+        <div>
+          <h2>🤖 AI hướng dẫn viên bảo tàng</h2>
+          <p>Hỏi về lịch sử Đà Nẵng hoặc khu vực bạn đang tham quan.</p>
+        </div>
+        <span class="pill ai-status" id="aiStatus">Đang kiểm tra kết nối</span>
+      </div>
+      
+      <div class="ai-suggestions">
+        <button class="outline ai-suggest" data-question="Khu vực tôi đang đứng trưng bày chủ đề gì?">📍 Giới thiệu phòng hiện tại</button>
+        <button class="outline ai-suggest" data-question="Vì sao Đà Nẵng có vai trò quan trọng trong lịch sử năm 1858?">📜 Sự kiện 1858</button>
+        <button class="outline ai-suggest" data-question="Tôi nên tham quan khu vực nào tiếp theo?">🧭 Gợi ý khám phá</button>
+      </div>
+      
+      <div id="aiMessages" class="ai-messages" aria-live="polite">
+        <div class="ai-bubble assistant">Xin chào! Mình là trợ lý bảo tàng. Bạn muốn tìm hiểu điều gì? Khi chưa kết nối API, mình có thể trả lời một số câu hỏi mẫu.</div>
+      </div>
+      
+      <form id="aiForm" class="ai-form">
+        <input id="aiInput" maxlength="600" autocomplete="off" placeholder="Ví dụ: Đà Nẵng năm 1858 có sự kiện gì?" aria-label="Câu hỏi cho AI" required>
+        <button id="aiSend" type="submit">Gửi câu hỏi</button>
+        <button type="button" class="outline" id="aiSpeak" title="Đọc câu trả lời">🔊 Đọc</button>
+        <button type="button" class="outline" id="aiMic" title="Nhập bằng giọng nói">🎙️ Nói</button>
+      </form>
+      <p class="hint">AI có thể nhầm lẫn. Nội dung lịch sử cần đối chiếu tư liệu chính thức. Không nhập thông tin cá nhân. Khi chạy bằng Live Server, chatbot hoạt động ở chế độ trả lời mẫu; không cần Java hay API key.</p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  
+  <dialog id="helpDialog">
+    <h2>Hướng dẫn sử dụng</h2>
+    <p><b>1.</b> Quét mã QR dán tại phòng để mở khóa phòng đó. Lần đầu ghé phòng được +100 điểm.</p>
+    <p><b>2.</b> Trả lời đúng câu hỏi của phòng để nhận thêm +50 điểm.</p>
+    <p><b>3.</b> Hoàn thành các thử thách kho báu để nhận +150 điểm mỗi nhiệm vụ.</p>
+    <p><b>4.</b> Nhấn “Nghe giới thiệu” để nghe giọng đọc tiếng Việt bằng chức năng có sẵn của trình duyệt.</p>
+    <p><b>5.</b> Để dùng QR thật, đưa web lên HTTPS, tạo mã cho mỗi phòng rồi in và đặt tại phòng tương ứng.</p>
+    <p><b>6.</b> Chế độ QR-only không cho phép Beacon mở khóa. Ứng dụng Android có thể gọi <code>window.onBeaconRoom('id-phong')</code> trong WebView.</p>
+    <p><b>Lưu ý:</b> vị trí các chấm trên ảnh là ước lượng, cần hiệu chỉnh với sơ đồ và cửa thực tế. Nội dung thuyết minh là giới thiệu mẫu, không phải nội dung chính thức của bảo tàng.</p>
+    <button id="closeHelp">Đóng</button>
+  </dialog>
+
+  <script src="app.js"></script>
+  <script src="ai.js"></script>
+</body>
+</html>

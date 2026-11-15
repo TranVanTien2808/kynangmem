@@ -1,0 +1,24 @@
+BẢO TÀNG ĐÀ NẴNG – TÁCH TRANG KHÁCH VÀ TRANG QUẢN LÝ QR
+
+1. MỞ WEBSITE TRÊN VS CODE:
+   File > Open Folder > chọn PUBLIC_UPLOAD_NETLIFY.
+   Mở index.html bằng Live Server.
+
+2. CÔNG KHAI WEBSITE:
+   Chỉ tải thư mục PUBLIC_UPLOAD_NETLIFY lên Netlify Drop.
+   KHÔNG tải thư mục ADMIN_CHI_MAY_BAN lên Netlify hoặc GitHub công khai.
+   Kiểm tra website bằng điện thoại trước khi in QR.
+
+3. TẠO QR RIÊNG CHO NGƯỜI QUẢN LÝ:
+   Mở file ADMIN_CHI_MAY_BAN/tao-qr-rieng.html trực tiếp trong Chrome
+   (nhấp đúp file, không cần Live Server).
+   Nhập URL HTTPS thật của website đã công khai, ví dụ https://ten-trang.netlify.app/.
+   Nhấn 'Tạo 12 mã QR', rồi 'In / Lưu PDF'.
+   In và dán mỗi mã đúng khu trưng bày.
+
+4. BẢO MẬT:
+   Vì trang tạo QR không được tải lên Internet, khách không thể truy cập trang đó từ website.
+   Không dùng mật khẩu viết trong JavaScript: người khác có thể xem mã nguồn.
+   Nếu muốn truy cập trang quản trị từ nhiều máy qua Internet, cần đăng nhập được kiểm tra
+   ở máy chủ hoặc nhà cung cấp xác thực (ví dụ Netlify Identity/hosting có access control).
+   Mã QR cố định có thể chia sẻ; khóa điểm trên giao diện không chống gian lận vị trí.
