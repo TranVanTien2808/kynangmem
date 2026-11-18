@@ -77,6 +77,10 @@
         <div class="map-viewport" id="viewport">
           <div class="map-content" id="mapContent">
             <img src="floor2.png" alt="Sơ đồ gốc tầng 2 Bảo tàng Đà Nẵng">
+            
+            <!-- Lớp phủ SVG để vẽ quỹ đạo chấm tròn -->
+            <svg id="pathLayer" viewBox="0 0 640 402"></svg>
+
             <div id="pins"></div>
           </div>
         </div>
@@ -178,6 +182,7 @@
     <p><b>Lưu ý:</b> vị trí các chấm trên ảnh là ước lượng, cần hiệu chỉnh với sơ đồ và cửa thực tế. Nội dung thuyết minh là giới thiệu mẫu, không phải nội dung chính thức của bảo tàng.</p>
     <button id="closeHelp">Đóng</button>
   </dialog>
+
 
   <script src="app.js"></script>
   <script src="ai.js"></script>
