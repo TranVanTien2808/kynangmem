@@ -87,6 +87,11 @@ function toast(text) {
 let newlyUnlocked = null;
 
 function visit(id, source = 'Mô phỏng') {
+  // Kiểm tra nếu trạm đã có trong lịch sử thì chặn lại
+  if (state.history.some(h => h.id === id)) {
+    showToast('Bạn đã check-in trạm này rồi! Hãy di chuyển đến trạm mới.');
+    return;
+  }
   const room = getRoom(id);
   if (!room) return false;
 
@@ -147,12 +152,12 @@ function render() {
   // --- BẮT ĐẦU: VẼ CHUỖI MŨI TÊN CHỈ HƯỚNG ---
   const pathLayer = $('pathLayer');
   if (pathLayer) {
-    // Xóa các đường mũi tên cũ, giữ lại phần <defs>
     pathLayer.querySelectorAll('.path-arrow-line').forEach(el => el.remove());
 
     const pathNodes = [];
     state.history.forEach(h => {
-      if (pathNodes.length === 0 || pathNodes[pathNodes.length - 1] !== h.id) {
+      // Chỉ thêm vào lộ trình nếu trạm này CHƯA TỪNG xuất hiện
+      if (!pathNodes.includes(h.id)) {
         pathNodes.push(h.id);
       }
     });
@@ -160,7 +165,7 @@ function render() {
     for (let i = 0; i < pathNodes.length - 1; i++) {
       const roomA = getRoom(pathNodes[i]);
       const roomB = getRoom(pathNodes[i + 1]);
-      const isLatest = (i === pathNodes.length - 2); // Chặng mới nhất
+      const isLatest = (i === pathNodes.length - 2);
 
       if (roomA && roomB) {
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
