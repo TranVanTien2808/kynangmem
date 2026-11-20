@@ -89,8 +89,9 @@ let newlyUnlocked = null;
 function visit(id, source = 'Mô phỏng') {
   // Kiểm tra nếu trạm đã có trong lịch sử thì chặn lại
   if (state.history.some(h => h.id === id)) {
-    showToast('Bạn đã check-in trạm này rồi! Hãy di chuyển đến trạm mới.');
-    return;
+    render(); // Vẽ lại bản đồ, ghim và mũi tên hiện có
+    toast('Bạn đã check-in trạm này rồi! Hãy di chuyển đến trạm mới.');
+    return false;
   }
   const room = getRoom(id);
   if (!room) return false;
