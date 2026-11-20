@@ -144,11 +144,11 @@ function render() {
   const pins = $('pins');
   pins.replaceChildren();
 
-  // --- BẮT ĐẦU: VẼ ĐƯỜNG NỐI CÁC TRẠM ---
+  // --- BẮT ĐẦU: VẼ CHUỖI MŨI TÊN CHỈ HƯỚNG ---
   const pathLayer = $('pathLayer');
   if (pathLayer) {
-    // Chỉ xóa các đường cũ, giữ lại thẻ <defs> chứa mũi tên
-    pathLayer.querySelectorAll('.path-line').forEach(el => el.remove());
+    // Xóa các đường mũi tên cũ, giữ lại phần <defs>
+    pathLayer.querySelectorAll('.path-arrow-line').forEach(el => el.remove());
 
     const pathNodes = [];
     state.history.forEach(h => {
@@ -160,20 +160,21 @@ function render() {
     for (let i = 0; i < pathNodes.length - 1; i++) {
       const roomA = getRoom(pathNodes[i]);
       const roomB = getRoom(pathNodes[i + 1]);
-      
+      const isLatest = (i === pathNodes.length - 2); // Chặng mới nhất
+
       if (roomA && roomB) {
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", roomA.x);
         line.setAttribute("y1", roomA.y);
         line.setAttribute("x2", roomB.x);
         line.setAttribute("y2", roomB.y);
-        line.setAttribute("class", "path-line");
-        line.setAttribute("marker-end", "url(#arrow)"); // Gắn mũi tên ở cuối
+        line.setAttribute("class", isLatest ? "path-arrow-line active" : "path-arrow-line old");
+        line.setAttribute("marker-end", isLatest ? "url(#arrow-end-active)" : "url(#arrow-end-old)");
         pathLayer.appendChild(line);
       }
     }
   }
-  // --- KẾT THÚC: VẼ ĐƯỜNG NỐI CÁC TRẠM ---
+  // --- KẾT THÚC: VẼ CHUỖI MŨI TÊN CHỈ HƯỚNG ---
 
   for (const r of rooms) {
     const b = document.createElement('button');

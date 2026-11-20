@@ -78,13 +78,24 @@
           <div class="map-content" id="mapContent">
             <img src="floor2.png" alt="Sơ đồ gốc tầng 2 Bảo tàng Đà Nẵng">
             
-            <!-- Lớp phủ SVG để vẽ quỹ đạo chấm tròn -->
             <svg id="pathLayer" viewBox="0 0 640 402">
               <defs>
-                <!-- Định nghĩa đầu mũi tên màu xanh dương -->
-                <marker id="arrow" viewBox="0 0 10 10" refX="18" refY="5"
-                markerWidth="14" markerHeight="14" orient="auto" markerUnits="userSpaceOnUse">
-                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+                <!-- Mẫu chuỗi mũi tên nhỏ màu xanh đậm (chặng mới nhất) -->
+                <pattern id="arrow-pattern-active" width="14" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 1 1 L 6 5 L 1 9 M 6 1 L 11 5 L 6 9" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                </pattern>
+                <!-- Đầu mũi tên chốt ở điểm cuối chặng mới nhất -->
+                <marker id="arrow-end-active" viewBox="0 0 10 10" refX="16" refY="5" markerWidth="9" markerHeight="9" orient="auto" markerUnits="userSpaceOnUse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb" />
+                </marker>
+
+                <!-- Mẫu chuỗi mũi tên nhỏ màu nhạt (chặng cũ) -->
+                <pattern id="arrow-pattern-old" width="14" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 1 1 L 6 5 L 1 9 M 6 1 L 11 5 L 6 9" fill="none" stroke="#93c5fd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </pattern>
+                <!-- Đầu mũi tên chốt ở điểm cuối chặng cũ -->
+                <marker id="arrow-end-old" viewBox="0 0 10 10" refX="16" refY="5" markerWidth="7" markerHeight="7" orient="auto" markerUnits="userSpaceOnUse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#93c5fd" />
                 </marker>
               </defs>
             </svg>
