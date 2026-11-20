@@ -79,7 +79,15 @@
             <img src="floor2.png" alt="Sơ đồ gốc tầng 2 Bảo tàng Đà Nẵng">
             
             <!-- Lớp phủ SVG để vẽ quỹ đạo chấm tròn -->
-            <svg id="pathLayer" viewBox="0 0 640 402"></svg>
+            <svg id="pathLayer" viewBox="0 0 640 402">
+              <defs>
+                <!-- Định nghĩa đầu mũi tên màu xanh dương -->
+                <marker id="arrow" viewBox="0 0 10 10" refX="18" refY="5"
+                markerWidth="14" markerHeight="14" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+                </marker>
+              </defs>
+            </svg>
 
             <div id="pins"></div>
           </div>

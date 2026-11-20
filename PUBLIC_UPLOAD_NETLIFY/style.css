@@ -13,11 +13,11 @@
 }
 
 .path-line {
-  stroke: #16a34a; /* Cùng màu xanh lá với các trạm đã quét */
-  stroke-width: 4;
-  stroke-linecap: round; /* Bo tròn nét vẽ thành dạng chấm */
-  stroke-dasharray: 0, 14; /* Chiều dài nét = 0, khoảng cách = 14 */
-  opacity: 0.8;
+  stroke: #2563eb; /* Màu xanh dương */
+  stroke-width: 6; /* Chấm tròn to hơn */
+  stroke-linecap: round;
+  stroke-dasharray: 0, 16; /* Khoảng cách giữa các chấm */
+  opacity: 0.9;
   animation: drawPath 0.6s ease-out forwards;
 }
 

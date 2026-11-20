@@ -147,7 +147,8 @@ function render() {
   // --- BẮT ĐẦU: VẼ ĐƯỜNG NỐI CÁC TRẠM ---
   const pathLayer = $('pathLayer');
   if (pathLayer) {
-    pathLayer.replaceChildren();
+    // Chỉ xóa các đường cũ, giữ lại thẻ <defs> chứa mũi tên
+    pathLayer.querySelectorAll('.path-line').forEach(el => el.remove());
 
     const pathNodes = [];
     state.history.forEach(h => {
@@ -167,6 +168,7 @@ function render() {
         line.setAttribute("x2", roomB.x);
         line.setAttribute("y2", roomB.y);
         line.setAttribute("class", "path-line");
+        line.setAttribute("marker-end", "url(#arrow)"); // Gắn mũi tên ở cuối
         pathLayer.appendChild(line);
       }
     }
