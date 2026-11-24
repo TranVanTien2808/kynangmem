@@ -12,28 +12,27 @@
   z-index: 2;
 }
 
-/* Các đường mũi tên */
-.path-arrow-line {
+.path-chevron {
   fill: none;
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* Chặng vừa đi: xanh đậm + hiệu ứng chạy trượt >>> */
-.path-arrow-line.active {
-  stroke: url(#arrow-pattern-active);
-  stroke-width: 10;
-  animation: marchArrows 0.8s linear infinite;
+/* Chặng mới nhất: xanh dương đậm, có sóng sáng chạy theo hướng đi */
+.path-group.active .path-chevron {
+  stroke: #2563eb;
+  stroke-width: 2.5;
+  animation: pulseArrow 1.2s infinite;
 }
 
-/* Các chặng cũ: xanh nhạt tĩnh */
-.path-arrow-line.old {
-  stroke: url(#arrow-pattern-old);
-  stroke-width: 9;
-  opacity: 0.75;
+/* Các chặng cũ: xanh nhạt, tĩnh */
+.path-group.old .path-chevron {
+  stroke: #93c5fd;
+  stroke-width: 2;
+  opacity: 0.7;
 }
 
-/* Hiệu ứng trượt dòng mũi tên theo chiều di chuyển */
-@keyframes marchArrows {
-  from { stroke-dashoffset: 28; }
-  to { stroke-dashoffset: 0; }
+@keyframes pulseArrow {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
 }

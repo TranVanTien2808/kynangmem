@@ -153,15 +153,16 @@ function render() {
   // --- BẮT ĐẦU: VẼ CHUỖI MŨI TÊN CHỈ HƯỚNG ---
   const pathLayer = $('pathLayer');
   if (pathLayer) {
-    pathLayer.querySelectorAll('.path-arrow-line').forEach(el => el.remove());
+    pathLayer.replaceChildren();
 
     const pathNodes = [];
     state.history.forEach(h => {
-      // Chỉ thêm vào lộ trình nếu trạm này CHƯA TỪNG xuất hiện
       if (!pathNodes.includes(h.id)) {
         pathNodes.push(h.id);
       }
     });
+
+    const ns = "http://www.w3.org/2000/svg";
 
     for (let i = 0; i < pathNodes.length - 1; i++) {
       const roomA = getRoom(pathNodes[i]);
@@ -169,14 +170,32 @@ function render() {
       const isLatest = (i === pathNodes.length - 2);
 
       if (roomA && roomB) {
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", roomA.x);
-        line.setAttribute("y1", roomA.y);
-        line.setAttribute("x2", roomB.x);
-        line.setAttribute("y2", roomB.y);
-        line.setAttribute("class", isLatest ? "path-arrow-line active" : "path-arrow-line old");
-        line.setAttribute("marker-end", isLatest ? "url(#arrow-end-active)" : "url(#arrow-end-old)");
-        pathLayer.appendChild(line);
+        const dx = roomB.x - roomA.x;
+        const dy = roomB.y - roomA.y;
+        const dist = Math.hypot(dx, dy);
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+        const g = document.createElementNS(ns, "g");
+        g.setAttribute("class", isLatest ? "path-group active" : "path-group old");
+        g.setAttribute("transform", `translate(${roomA.x}, ${roomA.y}) rotate(${angle})`);
+
+        const step = 12;
+        const startOffset = 18;
+        const endOffset = dist - 20;
+        let idx = 0;
+
+        for (let pos = startOffset; pos <= endOffset; pos += step) {
+          const chevron = document.createElementNS(ns, "path");
+          chevron.setAttribute("d", `M ${pos - 4} -4 L ${pos + 2} 0 L ${pos - 4} 4`);
+          chevron.setAttribute("class", "path-chevron");
+          if (isLatest) {
+            chevron.style.animationDelay = `${(idx * 0.08).toFixed(2)}s`;
+          }
+          g.appendChild(chevron);
+          idx++;
+        }
+
+        pathLayer.appendChild(g);
       }
     }
   }
