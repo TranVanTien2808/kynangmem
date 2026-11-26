@@ -1,0 +1,22 @@
+BỘ 12 ẢNH CHỤP DO NGƯỜI DÙNG CUNG CẤP
+
+Mỗi ảnh đã thay vào puzzle-images/<id>.jpg, tương ứng 12 khu vực trong app.js.
+Ảnh là ảnh chụp tủ trưng bày/tư liệu; ghép theo CHỦ ĐỀ gần nhất, chưa xác minh ảnh được chụp tại đúng khu vực trong sơ đồ.
+Tên ảnh chỉ là mô tả trực quan, không phải tên hiện vật chính thức.
+
+dien | 11332.jpg | Tư liệu hình ảnh Đà Nẵng thời kỳ phát triển
+khangchien | 11331.jpg | Xe máy và thiết bị trưng bày thời kỳ kháng chiến
+giaothong | 11334.jpg | Tủ trưng bày đồ gốm và dụng cụ sinh hoạt
+trungtich | 11328.jpg | Vũ khí và vật chứng chiến tranh
+hoinhap | 11335.jpg | Mô hình kiến trúc công trình
+khongphap | 11330.jpg | Ảnh tư liệu kiến trúc thời kỳ Pháp thuộc
+traoyeunuoc | 11337.jpg | Tư liệu văn bản lịch sử
+matran | 11336.jpg | Mô hình thuyền buồm truyền thống
+chungtichgiua | 11327.jpg | Vật dụng cá nhân và hiện vật chiến tranh
+cosodang | 11326.jpg | Tư liệu phong trào yêu nước và hoạt động cách mạng
+phim | 11323.jpg | Không gian trình chiếu phim tư liệu lịch sử
+chungtichduoi | 11324.jpg | Không gian trưng bày dòng thời gian lịch sử
+
+Cách chạy: Mở PUBLIC_UPLOAD_NETLIFY/index.html với Live Server. Quét QR ?location=<id> để mở khóa phòng.
+Chỉ upload PUBLIC_UPLOAD_NETLIFY lên Netlify, giữ ADMIN_CHI_MAY_BAN trên máy riêng.
+Ảnh nguồn: ảnh do người dùng tải lên cuộc trò chuyện; cần xác minh quyền sử dụng trước khi công khai.

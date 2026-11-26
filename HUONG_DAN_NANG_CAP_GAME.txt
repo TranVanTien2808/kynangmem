@@ -1,0 +1,22 @@
+BẢO TÀNG ĐÀ NẴNG – GAME NÂNG CẤP, CHẠY VS CODE + LIVE SERVER
+
+1. Mở PUBLIC_UPLOAD_NETLIFY trong VS Code.
+2. Mở index.html -> Open with Live Server (hoặc Go Live).
+3. Để thử QR trên máy tính, mở: http://127.0.0.1:5500/index.html?location=cosodang (chỉnh cổng nếu cần).
+4. Chỉ tải PUBLIC_UPLOAD_NETLIFY lên Netlify. KHÔNG tải ADMIN_CHI_MAY_BAN.
+5. Mở ADMIN_CHI_MAY_BAN/tao-qr-rieng.html trên máy riêng, nhập URL HTTPS website đã công khai và tạo 12 QR cố định để in.
+
+GAME:
+- Mỗi QR mở khóa 1 phòng; +100 điểm/phòng.
+- Trắc nghiệm 20 giây/phòng; đúng +50 điểm, thêm 5 XP/giây còn lại.
+- 3 kho báu theo địa điểm QR; mỗi kho báu +150 điểm.
+- Ghép hình 3x3 từ ảnh sơ đồ tầng 2; lần đầu đúng +250 XP.
+- 3 mật mã lịch sử; mỗi mật mã +120 XP.
+- Cấp độ mỗi 300 XP, tối đa cấp 6; 8 huy hiệu.
+- Điểm và XP lưu trên localStorage của từng trình duyệt. Không đồng bộ thiết bị.
+
+LƯU Ý:
+- QR cố định chỉ là URL có tham số location; có thể chia sẻ và tự nhập. Đây là khóa giao diện, không xác thực vị trí vật lý.
+- Nội dung quiz/mật mã là bản demo, cần được bảo tàng kiểm duyệt trước khi sử dụng chính thức.
+- Trang quản trị nằm ngoài thư mục công khai, giữ trên máy riêng.
+- AI là chatbot trả lời mẫu; không kết nối OpenAI API.

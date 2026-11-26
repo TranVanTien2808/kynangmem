@@ -67,35 +67,33 @@
           </div>
           <button class="outline" id="zoomReset">Thu về 100%</button>
         </div>
-        
+
         <div class="zoom-tools">
-          <button id="zoomOut" aria-label="Thu nhỏ">-</button>
+          <button id="zoomOut" aria-label="Thu nhỏ">−</button>
           <span id="zoomLabel">100%</span>
           <button id="zoomIn" aria-label="Phóng to">+</button>
         </div>
-        
+
         <div class="map-viewport" id="viewport">
           <div class="map-content" id="mapContent">
             <img src="floor2.png" alt="Sơ đồ gốc tầng 2 Bảo tàng Đà Nẵng">
-            
             <svg id="pathLayer" viewBox="0 0 640 402"></svg>
-
             <div id="pins"></div>
           </div>
         </div>
-        
+
         <div class="legend">
           <span><i class="blue"></i>Đang ở</span>
           <span><i class="green"></i>Đã tham quan</span>
           <span><i class="gray"></i>Chưa tham quan</span>
         </div>
-        
+
         <div class="location-card" aria-live="polite">
           <span>📍 Vị trí hiện tại</span>
           <strong id="currentRoom">Chưa xác định</strong>
           <small id="positionSource">Quét QR tại phòng để xác nhận vị trí.</small>
         </div>
-        
+
         <label for="roomSelect">Chế độ khóa QR (không cho chọn phòng thủ công)</label>
         <div class="input-row">
           <select id="roomSelect"></select>
@@ -111,24 +109,77 @@
       <div class="side">
         <section class="panel">
           <div class="section-heading">
-            <h2>🏅 Bộ sưu tập huy hiệu</h2>
+            <h2>🏅 Bộ sưu tập huy hiệu & cấp độ</h2>
+          </div>
+          <div class="game-level">
+            <strong id="gameLevel">Cấp 1 · Tân binh</strong>
+            <span id="gameXp">0 XP</span>
+            <div class="xp-track">
+              <div id="xpFill"></div>
+            </div>
+            <small id="xpNext">Còn 300 XP để lên cấp</small>
           </div>
           <div id="badges" class="badges"></div>
         </section>
-        
+
         <section class="panel">
-          <h2>🧩 Câu đố lịch sử</h2>
+          <h2>⏱️ Trắc nghiệm tính giờ</h2>
           <p class="hint">Đến một phòng để mở câu hỏi. Nội dung demo dựa trên tên khu trưng bày, có thể thay bằng câu hỏi do bảo tàng duyệt.</p>
+          <div class="timer-row">
+            <span id="quizClock">⏳ Chờ mở phòng</span>
+            <span id="quizBest">Mỗi phòng một lượt nhận XP</span>
+          </div>
           <div id="quizBox" class="quiz-box"></div>
         </section>
-        
+
         <section class="panel">
           <h2>💎 Truy tìm kho báu</h2>
           <p class="hint">Đến đúng khu vực được gợi ý để mở khóa kho báu.</p>
           <div id="treasures"></div>
+          <div id="treasureStory" class="mission-story"></div>
         </section>
       </div>
     </div>
+
+    <section class="panel bottom game-panel" id="miniGames">
+      <div class="section-heading">
+        <div>
+          <h2>🎮 Thử thách đặc biệt</h2>
+          <p>Chỉ mở sau khi quét QR tại phòng tương ứng. Hoàn thành để nhận XP.</p>
+        </div>
+      </div>
+
+      <div class="game-grid">
+        <article class="game-card">
+          <h3>🧩 Ghép hình hiện vật</h3>
+          <p>Mỗi khu vực có một ảnh chụp trưng bày do người dùng cung cấp. Quét QR tại phòng rồi đổi chỗ hai ô để ghép đúng.</p>
+          <p id="puzzleRoomTitle"></p>
+          <p class="hint">Ảnh chụp trưng bày do người dùng cung cấp. Tên ảnh là mô tả trực quan, chưa phải tên hiện vật được bảo tàng xác nhận.</p>
+          <a id="puzzleSource" href="#" target="_blank" rel="noopener noreferrer" hidden>Nguồn tra cứu hiện vật: Bảo tàng Đà Nẵng</a>
+          <div id="puzzleStatus" class="game-status">🔒 Quét QR một phòng bất kỳ để mở</div>
+          <div id="puzzleBoard" class="puzzle-board" aria-label="Bảng ghép hình"></div>
+          <div id="puzzleReveal" class="puzzle-reveal" hidden>
+            <p>🎉 Bạn đã hoàn thành bức ảnh!</p>
+            <img alt="Ảnh trưng bày sau khi ghép" loading="lazy">
+            <p><strong></strong></p>
+            <small>Ảnh: người dùng cung cấp</small>
+          </div>
+          <button id="puzzleShuffle" class="outline" type="button">Xáo trộn / Chơi lại</button>
+        </article>
+
+        <article class="game-card">
+          <h3>🔐 Giải mật mã lịch sử</h3>
+          <p>Giải mật mã bằng gợi ý lịch sử; mở khóa câu đố mới sau mỗi thử thách.</p>
+          <div id="cipherStatus" class="game-status">🔒 Quét QR để mở</div>
+          <p id="cipherClue" class="cipher-clue"></p>
+          <div class="input-row">
+            <input id="cipherAnswer" type="text" placeholder="Nhập đáp án" autocomplete="off" maxlength="80" aria-label="Đáp án mật mã">
+            <button id="cipherCheck" type="button">Kiểm tra</button>
+          </div>
+          <button id="cipherHint" type="button" class="outline">Xem gợi ý</button>
+        </article>
+      </div>
+    </section>
 
     <section class="panel bottom">
       <h2>📋 Các phòng và lịch sử</h2>
@@ -147,17 +198,17 @@
         </div>
         <span class="pill ai-status" id="aiStatus">Đang kiểm tra kết nối</span>
       </div>
-      
+
       <div class="ai-suggestions">
         <button class="outline ai-suggest" data-question="Khu vực tôi đang đứng trưng bày chủ đề gì?">📍 Giới thiệu phòng hiện tại</button>
         <button class="outline ai-suggest" data-question="Vì sao Đà Nẵng có vai trò quan trọng trong lịch sử năm 1858?">📜 Sự kiện 1858</button>
         <button class="outline ai-suggest" data-question="Tôi nên tham quan khu vực nào tiếp theo?">🧭 Gợi ý khám phá</button>
       </div>
-      
+
       <div id="aiMessages" class="ai-messages" aria-live="polite">
         <div class="ai-bubble assistant">Xin chào! Mình là trợ lý bảo tàng. Bạn muốn tìm hiểu điều gì? Khi chưa kết nối API, mình có thể trả lời một số câu hỏi mẫu.</div>
       </div>
-      
+
       <form id="aiForm" class="ai-form">
         <input id="aiInput" maxlength="600" autocomplete="off" placeholder="Ví dụ: Đà Nẵng năm 1858 có sự kiện gì?" aria-label="Câu hỏi cho AI" required>
         <button id="aiSend" type="submit">Gửi câu hỏi</button>
@@ -169,12 +220,12 @@
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  
+
   <dialog id="helpDialog">
     <h2>Hướng dẫn sử dụng</h2>
     <p><b>1.</b> Quét mã QR dán tại phòng để mở khóa phòng đó. Lần đầu ghé phòng được +100 điểm.</p>
-    <p><b>2.</b> Trả lời đúng câu hỏi của phòng để nhận thêm +50 điểm.</p>
-    <p><b>3.</b> Hoàn thành các thử thách kho báu để nhận +150 điểm mỗi nhiệm vụ.</p>
+    <p><b>2.</b> Trả lời câu hỏi có đồng hồ 20 giây; đúng được +50 điểm và XP thưởng theo thời gian.</p>
+    <p><b>3.</b> Tìm đủ ba manh mối kho báu theo thứ tự; ghép hình và giải mật mã để nhận XP và huy hiệu mới.</p>
     <p><b>4.</b> Nhấn “Nghe giới thiệu” để nghe giọng đọc tiếng Việt bằng chức năng có sẵn của trình duyệt.</p>
     <p><b>5.</b> Để dùng QR thật, đưa web lên HTTPS, tạo mã cho mỗi phòng rồi in và đặt tại phòng tương ứng.</p>
     <p><b>6.</b> Chế độ QR-only không cho phép Beacon mở khóa. Ứng dụng Android có thể gọi <code>window.onBeaconRoom('id-phong')</code> trong WebView.</p>
@@ -182,8 +233,8 @@
     <button id="closeHelp">Đóng</button>
   </dialog>
 
-
   <script src="app.js"></script>
+  <script src="game-upgrade.js"></script>
   <script src="ai.js"></script>
 </body>
 </html>
